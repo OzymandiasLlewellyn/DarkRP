@@ -145,7 +145,9 @@ function SWEP:PrimaryAttack()
 	if not IsValid(trace.Entity) or (self.Owner:EyePos():Distance(trace.Entity:GetPos()) > 100) then return end
 
 	if not trace.Entity:isDoor() then
-		trace.Entity:SetVelocity((trace.Entity:GetPos() - self.Owner:GetPos()) * 7)
+		local vel = (trace.Entity:GetPos() - self.Owner:GetPos()) * 7
+		vel.z = vel.z * 0.1
+		trace.Entity:SetVelocity(vel)
 	end
 
 	if trace.Entity:IsPlayer() or trace.Entity:IsNPC() or trace.Entity:IsVehicle() then
